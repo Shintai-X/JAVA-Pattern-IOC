@@ -1,11 +1,13 @@
 package DAO;
 
 import Model.Credit;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+@Component("d2")
 public class CreditDaoV2 implements IDao<Credit,Long> {
     public static Set<Credit> BDCreditsV2(){
         return new HashSet<Credit>(

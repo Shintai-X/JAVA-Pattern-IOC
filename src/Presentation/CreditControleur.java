@@ -7,13 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
+
 public class CreditControleur implements  ICreditControleur{
 
+    @Autowired
     ICreditMetier creditMetier;
 
     @Override

@@ -5,6 +5,9 @@ import Metier.ICreditMetier;
 import Model.Credit;
 import Presentation.CreditControleur;
 import Presentation.ICreditControleur;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,6 +96,7 @@ public class SimulatteurDeCredit_App {
             var metier = (ICreditMetier) cMetier.getDeclaredConstructor().newInstance();
             creditControleur    = (ICreditControleur) cController.getDeclaredConstructor().newInstance();
 
+            // cMetier.getMethod(nom de la methode , type du parametre)
             Method setDao       = cMetier.getMethod("setCreditDao", IDao.class);
             setDao.invoke(metier,dao);
 
@@ -106,9 +110,21 @@ public class SimulatteurDeCredit_App {
         }
     }
 
+    public static void test3() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-ioc.xml");
+        creditControleur = (ICreditControleur) context.getBean("controleur");
+        creditControleur.NS_afficher_Mensualite(1L);
+    }
+
+    public static void test4() throws Exception{
+        ApplicationContext context = new AnnotationConfigApplicationContext("dao","metier","presentation");
+        creditControleur = (ICreditControleur) context.getBean(ICreditControleur.class);
+        creditControleur.NS_afficher_Mensualite(1L);
+    }
+
     public static void main(String[] args) {
         try {
-            test2();
+            test4();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

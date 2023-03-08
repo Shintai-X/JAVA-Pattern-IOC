@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.Credit;
+import org.springframework.stereotype.Component;
 
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-
+@Component("d1")
 public class CreditDao implements IDao<Credit,Long> {
 
 
